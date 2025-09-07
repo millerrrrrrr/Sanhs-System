@@ -16,6 +16,7 @@ Route::get('home', [DashboardController::class, 'home'])->name('home');
 Route::prefix('student')->controller(StudentController::class)->group(function(){
 
     Route::get('register', 'register')->name('register');
+    Route::post('register', 'store')->name('registerStudent');
 
 });
 
