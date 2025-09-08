@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Level;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -91,5 +92,14 @@ class StudentController extends Controller
     
         return redirect()->back()->with('success', 'Student registered successfully with QR Code!');
 
+    }
+
+    public function studentList(){
+
+        $students = DB::table('students')
+        ->select('*')
+        ->orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
+        ->get();
+        return view('student.list', compact('students'));
     }
 }

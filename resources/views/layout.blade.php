@@ -31,7 +31,7 @@
                 <select id="dropdown"
                     class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition text-center">
                     <option value="" selected disabled>Student</option>
-                    <option value="#">Student List</option>
+                    <option value=" {{ route('studentList') }} ">Student List</option>
                     <option value="{{ route('register') }}">Register Student</option>
                 </select>
             </div>

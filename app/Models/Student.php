@@ -10,6 +10,7 @@ class Student extends Model
 {
     use Notifiable, HasFactory;
 
+
     protected $fillable = [
         'name',
         'age',
