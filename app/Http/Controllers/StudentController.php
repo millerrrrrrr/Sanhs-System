@@ -99,7 +99,14 @@ class StudentController extends Controller
         $students = DB::table('students')
         ->select('*')
         ->orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
-        ->get();
+        ->paginate(10);
         return view('student.list', compact('students'));
+    }
+
+    public function viewStudent($id, Student $student){
+
+        $student = Student::findOrFail($id);
+
+        return view('student.view', compact('student'));
     }
 }

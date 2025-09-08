@@ -18,6 +18,7 @@ Route::prefix('student')->controller(StudentController::class)->group(function()
     Route::get('register', 'register')->name('register');
     Route::post('register', 'store')->name('registerStudent');
     Route::get('/list', 'studentList')->name('studentList');
+    Route::get('/{id}', 'viewStudent')->name('viewStudent');
 
 });
 

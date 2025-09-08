@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="bg-[#f8fafc] h-screen flex flex-col font-sans text-[#111827]">
+<body class="bg-[#f8fafc] min-h-screen flex flex-col font-sans text-[#111827]">
 
     <header class="bg-[#660B05] shadow-md p-3 flex justify-between items-center sticky top-0 z-50">
         <div class="flex items-center space-x-4">
