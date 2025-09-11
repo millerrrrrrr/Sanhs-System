@@ -19,6 +19,7 @@ Route::prefix('student')->controller(StudentController::class)->group(function()
     Route::post('register', 'store')->name('registerStudent');
     Route::get('/list', 'studentList')->name('studentList');
     Route::get('/{id}', 'viewStudent')->name('viewStudent');
+    Route::get('/{id}/edit' , 'edit')->name('editStudent');
 
 });
 
