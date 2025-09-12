@@ -17,9 +17,16 @@ Route::prefix('student')->controller(StudentController::class)->group(function()
 
     Route::get('register', 'register')->name('register');
     Route::post('register', 'store')->name('registerStudent');
-    Route::get('/list', 'studentList')->name('studentList');
-    Route::get('/{id}', 'viewStudent')->name('viewStudent');
-    Route::get('/{id}/edit' , 'edit')->name('editStudent');
+    Route::get('list', 'studentList')->name('studentList');
+    Route::get('deleted', 'recentlyDeleted')->name('recentlyDeleted');
+    
+    Route::get('{id}', 'viewStudent')->name('viewStudent');
+    Route::get('{id}/edit' , 'edit')->name('editStudent');
+    Route::put('{id}/edit', 'update')->name('updateStudent');
+    Route::delete('list/{id}', 'delete')->name('studentDelete');
+    Route::post('deleted/{id}', 'restoreStudent')->name('restoreStudent');
+    Route::delete('deleted/{id}', 'permanentlyDelete')->name('permanentlyDelete');
+
 
 });
 

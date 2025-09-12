@@ -1,5 +1,6 @@
 @extends('layout')
 @section('title', 'Register Student')
+@section('pagetitle', 'Register Student')
 
 @section('main')
     <div class="p-6 bg-white w-full max-w-2xl mx-auto rounded-md shadow-md">

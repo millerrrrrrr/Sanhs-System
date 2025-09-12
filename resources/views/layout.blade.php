@@ -33,6 +33,7 @@
                     <option value="" selected disabled>Student</option>
                     <option value=" {{ route('studentList') }} ">Student List</option>
                     <option value="{{ route('register') }}">Register Student</option>
+                    <option value=" {{ route('recentlyDeleted') }} ">Recently Deleted</option>
                 </select>
             </div>
     

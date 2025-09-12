@@ -1,5 +1,6 @@
 @extends('layout')
 @section('title', 'Edit Student')
+@section('pagetitle', 'Edit Student')
 
 @section('main')
     <div class="p-6 bg-white w-full max-w-2xl mx-auto rounded-md shadow-md">
@@ -16,8 +17,10 @@
             </div>
         @endif
 
-        <form action="" method="POST" class="space-y-4">
+        <form action=" {{ route('updateStudent', $student->id) }} " method="POST" class="space-y-4">
+            
             @csrf
+            @method('PUT')
 
             {{-- Name --}}
             <div>
@@ -72,7 +75,7 @@
                     required>
                     <option value="" disabled selected>-- Select Grade --</option>
                     @foreach ($grade as $gr)
-                        <option value="{{ $gr->level }}" {{ old('level', $student->grade) == $gr->level ? 'selected' : '' }}>
+                        <option value="{{ $gr->level }}" {{ old('level', $student->level) == $gr->level ? 'selected' : '' }}>
                             {{ $gr->level }}
                         </option>
                     @endforeach

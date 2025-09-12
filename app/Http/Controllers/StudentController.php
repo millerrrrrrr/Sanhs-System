@@ -55,11 +55,9 @@ class StudentController extends Controller
 
     public function studentList()
     {
-
-        $students = DB::table('students')
-            ->select('*')
-            ->orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
-            ->paginate(10);
+        $students = Student::orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
+        ->paginate(10);
+    
         return view('student.list', compact('students'));
     }
 
@@ -78,5 +76,86 @@ class StudentController extends Controller
 
         // Corrected compact method
         return view('student.update', compact('student', 'grade'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+
+        $validated = $request->validate([
+            'name'    => 'required|string|max:255',
+            'age'     => 'required|integer|min:1|max:100',
+            'gender'  => 'required|in:Male,Female',
+            'address' => 'required|string',
+            'lrn'     => 'required|digits:12|unique:students,lrn,' . $student->id,
+            'level'   => 'required|string',
+        ]);
+
+        if ($validated['lrn'] !== $student->lrn) {
+            // Delete old QR code
+            if ($student->qrCode && file_exists(public_path($student->qrCode))) {
+                unlink(public_path($student->qrCode));
+            }
+
+            $fileName = 'student-' . $validated['lrn'] . '-' . Str::random(6) . '.png';
+            $filePath = public_path('qrCode/' . $fileName);
+
+            // Generate new QR code
+            QrCode::format('png')
+                ->size(300)
+                ->errorCorrection('H')
+                ->generate($validated['lrn'], $filePath);
+
+            $validated['qrCode'] = 'qrCode/' . $fileName;
+        } else {
+            $validated['qrCode'] = $student->qrCode;
+        }
+
+        $student->update($validated);
+
+        return redirect()->route('studentList')->with('success', 'Student updated successfully!');
+    }
+
+    public function delete($id){
+        $student = Student::findOrFail($id);
+
+        $deleted = $student->delete();
+        if($deleted){
+            return back()->with('success', 'Deleted Successfully');
+        }
+        return back()->with('error', 'Failed');
+
+    }
+
+    public function recentlyDeleted(){
+        $students = Student::orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
+        ->onlyTrashed()
+        ->paginate(10);
+        return view('student.recentlyDeleted', compact('students'));
+    }
+
+    public function restoreStudent($id){
+        $restore = Student::onlyTrashed()->findOrFail($id)->restore();
+
+        if ($restore){
+            return back()->with('success', 'Restored Successfully');
+        }
+    }
+
+    public function permanentlyDelete($id){
+        $student = Student::onlyTrashed()->findOrFail($id);
+
+
+        if($student->qrCode && file_exists(public_path($student->qrCode))){
+            unlink(public_path($student->qrCode));
+        }
+
+        $permanentlyDelete = $student->forceDelete();
+
+        if($permanentlyDelete){
+            return back()->with('success', 'Permanently Deleted');
+        }
+        return back()->with('error', 'Failed Delete');
+
     }
 }
