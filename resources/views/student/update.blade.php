@@ -82,6 +82,19 @@
                 </select>
             </div>
 
+            <div class="mt-4">
+                <label for="guardian" class="block text-sm font-medium text-gray-600">Guardian Name</label>
+                <input type="text" name="guardian" id="guardian"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
+                    value="{{ old('guardian', $student->guardian) }}">
+            </div>
+            <div class="mt-4">
+                <label for="email" class="block text-sm font-medium text-gray-600">Guardian Email</label>
+                <input type="text" name="email" id="email"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
+                    value="{{ old('email', $student->email) }}">
+            </div>
+
             {{-- Submit --}}
             <div class="pt-4">
                 <button type="submit"

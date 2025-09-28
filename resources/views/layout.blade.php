@@ -116,6 +116,13 @@
                     title: @json(session('question'))
                 })
             @endif
+
+            @foreach($errors->all() as $error)
+                Toast.fire({
+                    icon: 'warning',
+                    title: @json($error)
+                })
+            @endforeach
         });
     </script>
 

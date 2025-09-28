@@ -31,10 +31,10 @@
                                 {{-- <td class="py-3 px-4">{{ $s->address }}</td> --}}
                                 {{-- <td class="py-3 px-4">{{ $s->lrn }}</td> --}}
                                 <td class="py-3 px-4"> {{ $s->level }} </td>
-                                <td class="py-3 px-4"> {{ $s->deleted_at }} </td>
                                 <td class="py-3 px-4">
                                     <img src=" {{ asset($s->qrCode) }} " alt="QR Code" class="w-16 h-16 mx-auto">
                                 </td>
+                                <td class="py-3 px-4"> {{ $s->deleted_at }} </td>
                                 <td class="py-3 px-4  ">
                                     <div class="inline-block">
                                         <form action=" {{ route('restoreStudent', $s->id) }} " method="POST">

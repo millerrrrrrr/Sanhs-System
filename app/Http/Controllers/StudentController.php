@@ -28,6 +28,8 @@ class StudentController extends Controller
             'address' => 'required|string',
             'lrn'     => 'required|digits:12|unique:students,lrn',
             'level'   => 'required|string',
+            'guardian' => 'required|string|max:255',
+            'email'    => 'required|email|unique:students,email',
         ]);
 
         // Generate QR code data (only LRN)

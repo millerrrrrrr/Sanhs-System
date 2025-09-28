@@ -25,6 +25,8 @@
                 <p><span class="font-semibold">Address:</span> {{ $student->address }} </p>
                 <p><span class="font-semibold">LRN:</span> {{ $student->lrn }} </p>
                 <p><span class="font-semibold">Level:</span> {{ $student->level }} </p>
+                <p><span class="font-semibold">Guardian:</span> {{ $student->guardian }} </p>
+                <p><span class="font-semibold">Guardian's Email:</span> {{ $student->email }} </p>
             </div>
         </div>
     </div>

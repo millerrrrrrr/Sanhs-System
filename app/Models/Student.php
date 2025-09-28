@@ -19,6 +19,8 @@ class Student extends Model
         'address',
         'lrn',
         'level',
+        'guardian',
+        'email',
         'qrCode',
     ];
 }
