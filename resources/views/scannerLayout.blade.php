@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 
-    {{-- @vite('resources/css/app.css') --}}
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -22,34 +21,7 @@
         </div>
         
         <div class="flex items-center gap-4">
-            <div>
-                <a href="{{ route('home') }}"
-                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition">Home</a>
-            </div>
-
-            <div>
-                <a href=" {{ route('qrTesterIndex') }} "
-                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition ml-8">Qr Tester</a>
-            </div>
-    
-            <div>
-                <select id="dropdown"
-                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition text-center">
-                    <option value="" selected disabled>Student</option>
-                    <option value=" {{ route('studentList') }} ">Student List</option>
-                    <option value="{{ route('register') }}">Register Student</option>
-                    <option value=" {{ route('recentlyDeleted') }} ">Recently Deleted</option>
-                </select>
-            </div>
-    
-            <div>
-                <select id="level"
-                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition text-center">
-                    <option value="" selected disabled>Grade & Section</option>
-                    <option value="{{ route('level') }}">List</option>
-                </select>
-            </div>
-    
+            
             <form action="#" method="POST">
                 @csrf
                 <button type="submit"
@@ -130,8 +102,6 @@
             @endforeach
         });
     </script>
-
-    
 
 </body>
 

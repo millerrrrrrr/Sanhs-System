@@ -91,6 +91,8 @@ class StudentController extends Controller
             'address' => 'required|string',
             'lrn'     => 'required|digits:12|unique:students,lrn,' . $student->id,
             'level'   => 'required|string',
+            'guardian' => 'required|string|max:255',
+            'email'    => 'required|email|unique:students,email',
         ]);
 
         if ($validated['lrn'] !== $student->lrn) {

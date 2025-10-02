@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\QrTesterController;
+use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +38,21 @@ Route::prefix('level')->controller(LevelController::class)->group(function(){
     Route::post('/', 'add')->name('levelAdd');
     Route::get('/{id}/edit', 'edit')->name('levelEdit');
     Route::patch('/{id}', 'update')->name('levelUpdate');
+
+});
+
+
+Route::prefix('qrTester')->controller(QrTesterController::class)->group(function(){
+
+    Route::get('/', 'qrTesterIndex')->name('qrTesterIndex');
+
+});
+
+
+// SCANNER
+
+Route::prefix('scanner')->controller(ScannerController::class)->group(function(){
+
+    Route::get('/', 'scannerIndex')->name('scannerIndex');
 
 });

@@ -6,16 +6,7 @@
     <div class="p-6 bg-white w-full max-w-2xl mx-auto rounded-md shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-gray-700">Edit Student</h2>
 
-        {{-- Show validation errors --}}
-        @if ($errors->any())
-            <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+       
 
         <form action=" {{ route('updateStudent', $student->id) }} " method="POST" class="space-y-4">
             
