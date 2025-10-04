@@ -56,3 +56,5 @@ Route::prefix('scanner')->controller(ScannerController::class)->group(function()
     Route::get('/', 'scannerIndex')->name('scannerIndex');
 
 });
+
+Route::get('/get-student/{lrn}', [StudentController::class, 'getStudentByLrn']);

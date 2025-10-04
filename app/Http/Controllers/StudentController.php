@@ -162,4 +162,27 @@ class StudentController extends Controller
         return back()->with('error', 'Failed Delete');
 
     }
+
+    // app/Http/Controllers/StudentController.php
+
+public function getStudentByLrn($lrn)
+{
+    // Find the student by LRN
+    $student = Student::where('lrn', $lrn)->first();
+
+    // If student is found, return the data
+    if ($student) {
+        return response()->json([
+            'success' => true,
+            'student' => $student
+        ]);
+    }
+
+    // If student is not found, return an error message
+    return response()->json([
+        'success' => false,
+        'message' => 'Student not found'
+    ]);
+}
+
 }
