@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Middleware\adminOnly;
+use App\Http\Middleware\attendanceOnly;
+use App\Http\Middleware\AuthCheck;
+use App\Http\Middleware\RoleCheck;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,7 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'authCheck' => AuthCheck::class,
+            'admin'=> adminOnly::class,
+            'attendance' => attendanceOnly::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

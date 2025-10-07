@@ -58,8 +58,8 @@ class StudentController extends Controller
     public function studentList()
     {
         $students = Student::orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
-        ->paginate(10);
-    
+            ->paginate(10);
+
         return view('student.list', compact('students'));
     }
 
@@ -120,69 +120,51 @@ class StudentController extends Controller
         return redirect()->route('studentList')->with('success', 'Student updated successfully!');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $student = Student::findOrFail($id);
 
         $deleted = $student->delete();
-        if($deleted){
+        if ($deleted) {
             return back()->with('success', 'Deleted Successfully');
         }
         return back()->with('error', 'Failed');
-
     }
 
-    public function recentlyDeleted(){
+    public function recentlyDeleted()
+    {
         $students = Student::orderByRaw('CAST(SUBSTRING_INDEX(level, " ", 1) AS UNSIGNED) ASC')
-        ->onlyTrashed()
-        ->paginate(10);
+            ->onlyTrashed()
+            ->paginate(10);
         return view('student.recentlyDeleted', compact('students'));
     }
 
-    public function restoreStudent($id){
+    public function restoreStudent($id)
+    {
         $restore = Student::onlyTrashed()->findOrFail($id)->restore();
 
-        if ($restore){
+        if ($restore) {
             return back()->with('success', 'Restored Successfully');
         }
     }
 
-    public function permanentlyDelete($id){
+    public function permanentlyDelete($id)
+    {
         $student = Student::onlyTrashed()->findOrFail($id);
 
 
-        if($student->qrCode && file_exists(public_path($student->qrCode))){
+        if ($student->qrCode && file_exists(public_path($student->qrCode))) {
             unlink(public_path($student->qrCode));
         }
 
         $permanentlyDelete = $student->forceDelete();
 
-        if($permanentlyDelete){
+        if ($permanentlyDelete) {
             return back()->with('success', 'Permanently Deleted');
         }
         return back()->with('error', 'Failed Delete');
-
     }
 
-    // app/Http/Controllers/StudentController.php
-
-public function getStudentByLrn($lrn)
-{
-    // Find the student by LRN
-    $student = Student::where('lrn', $lrn)->first();
-
-    // If student is found, return the data
-    if ($student) {
-        return response()->json([
-            'success' => true,
-            'student' => $student
-        ]);
-    }
-
-    // If student is not found, return an error message
-    return response()->json([
-        'success' => false,
-        'message' => 'Student not found'
-    ]);
-}
+    
 
 }

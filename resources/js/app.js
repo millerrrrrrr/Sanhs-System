@@ -34,7 +34,7 @@ const startQrScanner = () => {
             document.getElementById("scanned-data").innerText = decodedText;
 
             // Send the LRN to the backend to fetch student information
-            fetch(`/get-student/${decodedText}`)
+            fetch(`qrTester/get-student/${decodedText}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {

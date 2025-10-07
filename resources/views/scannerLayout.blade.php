@@ -22,7 +22,7 @@
         
         <div class="flex items-center gap-4">
             
-            <form action="#" method="POST">
+            <form action=" {{ route('logout') }} " method="POST">
                 @csrf
                 <button type="submit"
                     class="text-sm bg-red-500 text-white px-3 py-1 hover:bg-red-600 transition duration-200 rounded-md">Logout</button>

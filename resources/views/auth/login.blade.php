@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -21,20 +21,20 @@
     
 
             <h2 class="text-2xl font-bold text-center mb-15">Login</h2>
-            <form  action="#" method="POST"class="space-y-4">
+            <form  action=" {{ route('loginPost') }} " method="POST"class="space-y-4">
                 @csrf
         
                
                 <div class="mt-2">
                     <label for="username" class="block font-medium">Username</label>
                     <input type="text" class="mt-1 block border-b-1 w-full focus:outline-none"
-                    name="password">
+                    name="username" >
                 </div>
                
                 <div class="mt-2">
                     <label for="password" class="block font-medium">Password</label>
                     <input type="password" class="mt-1 block border-b-1 w-full focus:outline-none"
-                    name="password">
+                    name="password" >
                 </div>
 
                 <div class="mt-2">
@@ -89,6 +89,13 @@
                     title: @json(session('question'))
                 })
             @endif
+
+             @foreach($errors->all() as $error)
+                Toast.fire({
+                    icon: 'warning',
+                    title: @json($error)
+                })
+            @endforeach
         });
     </script>
     
