@@ -8,9 +8,9 @@ use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/', [AuthController::class, 'login'])->name('loginPost');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::post('/', [AuthController::class, 'login'])->name('loginPost')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('guest');
 
 
 Route::middleware(['authCheck', 'admin'])->group(function () {

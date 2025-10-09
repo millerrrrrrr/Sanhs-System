@@ -12,7 +12,6 @@ window.Toast = Swal.mixin({
     timer: 2500,
     timerProgressBar: false,
 });
-
 import { Html5QrcodeScanner } from "html5-qrcode";
 
 // Function to initialize the QR Code scanner
@@ -23,6 +22,9 @@ const startQrScanner = () => {
             fps: 10, // Frames per second (scan rate)
             qrbox: 250, // Size of the QR scanning box
             facingMode: "environment", // Use the back camera (default)
+            showScanRegion: false,  // Optional: hides the scan region UI
+            showResultButton: false, // Optional: hides the result button (Start Scanning)
+            disableScanIfNotAllowed: true, // Disable the scanner if camera permissions aren't granted
         },
         false // Whether to use the scan region to highlight the QR box
     );
@@ -44,7 +46,7 @@ const startQrScanner = () => {
                                 <p><strong>Name:</strong> ${data.student.name}</p>
                                 <p><strong>Age:</strong> ${data.student.age}</p>
                                 <p><strong>Gender:</strong> ${data.student.gender}</p>
-                                <p><strong>Gender:</strong> ${data.student.address}</p>
+                                <p><strong>Address:</strong> ${data.student.address}</p>
                                 <p><strong>Level:</strong> ${data.student.level}</p>
                                 <p><strong>Guardian:</strong> ${data.student.guardian}</p>
                                 <p><strong>Email:</strong> ${data.student.email}</p>
@@ -69,7 +71,8 @@ const startQrScanner = () => {
     );
 };
 
-// Call the startQrScanner function when the page is loaded
+// Call the startQrScanner function automatically when the page is loaded
 document.addEventListener("DOMContentLoaded", () => {
+    // Automatically start the QR scanner without user interaction
     startQrScanner();
 });
