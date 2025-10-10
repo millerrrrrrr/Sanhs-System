@@ -131,6 +131,7 @@
         });
     </script>
     
+    @stack('scripts')
     
     
 
