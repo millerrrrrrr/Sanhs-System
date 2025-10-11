@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
 Route::post('/', [AuthController::class, 'login'])->name('loginPost')->middleware('guest');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['authCheck', 'admin'])->group(function () {
@@ -59,7 +59,9 @@ Route::middleware(['authCheck', 'attendance'])->group(function () {
     Route::prefix('scanner')->controller(ScannerController::class)->group(function () {
 
         Route::get('/', 'scannerIndex')->name('scannerIndex');
+        Route::get('/attendance/record/{lrn}', 'record');
     });
 });
+
 
 // Route::get('/get-student/{lrn}', [StudentController::class, 'getStudentByLrn']);

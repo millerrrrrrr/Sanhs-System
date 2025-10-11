@@ -18,6 +18,9 @@ class Attendance extends Model
         'time_in',
         'time_out',
         'status',
+        'pm_time_in',
+        'pm_time_out',
+        'pm_status',
     ];
 
     public function student(){
