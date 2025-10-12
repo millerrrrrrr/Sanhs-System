@@ -21,6 +21,8 @@ class Attendance extends Model
         'pm_time_in',
         'pm_time_out',
         'pm_status',
+        'student_status',
+        'student_pm_status',
     ];
 
     public function student(){

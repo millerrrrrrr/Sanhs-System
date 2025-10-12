@@ -29,11 +29,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const qrRegionId = "qr-reader";
     const html5QrCode = new Html5Qrcode(qrRegionId);
-    
-    let isProcessing = false;
-    let lastScanTimes = {}; // store cooldowns per LRN (student)
 
-    const SCAN_COOLDOWN = 10000; // 10 seconds
+    let isProcessing = false;
+    const lastScanTimes = {}; // cooldown tracker
+    const SCAN_COOLDOWN = 10000; // 10 seconds per student
 
     const startScanner = () => {
         html5QrCode.start(
@@ -41,16 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
             { fps: 10, qrbox: 250 },
             async (decodedText) => {
                 const now = Date.now();
+                const cooldown = lastScanTimes[decodedText] && (now - lastScanTimes[decodedText] < SCAN_COOLDOWN);
 
-                // 🔹 Cooldown per student (same QR)
-                if (lastScanTimes[decodedText] && (now - lastScanTimes[decodedText] < SCAN_COOLDOWN)) {
-                    console.log(`Cooldown active for ${decodedText}`);
-                    return;
-                }
-
-                if (isProcessing) return;
+                if (cooldown || isProcessing) return;
                 isProcessing = true;
-                lastScanTimes[decodedText] = now; // mark scan time for this QR
+                lastScanTimes[decodedText] = now;
 
                 document.getElementById("qr-result").classList.remove("hidden");
                 document.getElementById("scanned-data").innerText = decodedText;
@@ -59,40 +53,54 @@ document.addEventListener("DOMContentLoaded", () => {
                 container.innerHTML = `<p class="text-gray-500 italic">Recording attendance...</p>`;
 
                 try {
-                    // 🔹 AJAX fetch (no page reload)
-                    const response = await fetch(`scanner/attendance/record/${decodedText}`, { method: "GET" });
+                    // Use AJAX to send the LRN to your backend
+                    const response = await fetch(`/scanner/attendance/record/${decodedText}`);
                     const data = await response.json();
 
                     if (!data.success) {
                         container.innerHTML = `<p class="text-red-500 font-semibold">${data.message}</p>`;
                     } else {
-                        const student = data.student;
-                        const attendance = data.attendance;
+                        const { student, attendance } = data;
 
-                        // 🔹 Local PH Time
+                        // Local Philippine time
                         const phTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Manila" });
                         const date = new Date(phTime);
                         const hours = date.getHours();
+
                         let greeting = "Good morning";
                         if (hours >= 12 && hours < 18) greeting = "Good afternoon";
                         else if (hours >= 18) greeting = "Good evening";
+
+                        // Determine colors
+                        const presenceColor =
+                            attendance.current === "In" ? "text-green-600" :
+                            attendance.current === "Out" ? "text-gray-600" : "text-gray-500";
+
+                        const statusColor =
+                            attendance.status === "Late" ? "text-yellow-600" :
+                            attendance.status === "Present" ? "text-green-600" : "text-gray-600";
 
                         container.innerHTML = `
                             <div class="bg-gray-50 p-6 rounded-lg shadow-inner animate-fadeIn">
                                 <h3 class="text-2xl font-semibold text-center mb-2">${greeting}, ${student.name}!</h3>
                                 <hr class="my-3">
                                 <div class="space-y-2 text-lg">
-                                    <p><strong>Status:</strong> 
-                                        <span class="${
-                                            attendance.status === 'Present' ? 'text-green-600' :
-                                            attendance.status === 'Late' ? 'text-yellow-600' :
-                                            attendance.status === 'Left' ? 'text-blue-600' :
-                                            'text-gray-600'
-                                        } font-semibold">${attendance.status}</span>
+                                    <p><strong>Session:</strong> ${attendance.session}</p>
+                                    <p><strong>Attendance Status:</strong>
+                                        <span class="${statusColor} font-semibold">
+                                            ${attendance.status || 'Not yet recorded'}
+                                        </span>
+                                    </p>
+                                    <p><strong>Current State:</strong>
+                                        <span class="${presenceColor} font-semibold">
+                                            ${attendance.current || 'Not yet recorded'}
+                                        </span>
                                     </p>
                                     <p><strong>Time In:</strong> ${attendance.time_in || '-'}</p>
                                     <p><strong>Time Out:</strong> ${attendance.time_out || '-'}</p>
                                 </div>
+                                <hr class="my-3">
+                                <p class="text-center text-gray-700 italic">${attendance.message}</p>
                             </div>
                         `;
                     }
@@ -104,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             (errorMessage) => {
-                // Optional: ignore scanning noise
+                // ignore scan noise
             }
         );
     };

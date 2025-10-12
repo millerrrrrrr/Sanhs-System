@@ -28,6 +28,11 @@
             </div>
 
             <div>
+                <a href="{{ route('attendanceIndex') }}"
+                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition ml-8">Attendance</a>
+            </div>
+
+            <div>
                 <a href=" {{ route('qrTesterIndex') }} "
                     class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition ml-8">Qr Tester</a>
             </div>

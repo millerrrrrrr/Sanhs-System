@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LevelController;
@@ -51,7 +52,11 @@ Route::middleware(['authCheck', 'admin'])->group(function () {
 
     // SCANNER
 
+    Route::prefix('attendance')->controller(AttendanceController::class)->group(function () {
 
+        Route::get('/', 'AttendanceIndex')->name('attendanceIndex');
+        Route::get('/search', 'search')->name('attendanceSearch');
+    });
 });
 
 
