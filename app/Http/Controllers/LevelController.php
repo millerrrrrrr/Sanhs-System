@@ -20,7 +20,9 @@ class LevelController extends Controller
     public function add(Request $request)
     {
 
-        $request->validate(['level']);
+        $request->validate([
+            'level' => 'required',
+        ]);
 
 
 

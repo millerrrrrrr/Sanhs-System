@@ -21,11 +21,7 @@
                         <label for="category" class="block text-[#3b38a0]  font-medium">Add Grade & Section</label>
                         <input type="category" name="level" class="input"  autofocus>
                            
-                        @if ($errors->has('level'))
-                            <span class="text-red-500">
-                                {{ $errors->first('level') }}
-                            </span>
-                        @endif
+                        
                     </div>
 
 
@@ -33,7 +29,7 @@
                     <div class="flex items-center justify-between mb-4 text-blue-800">
 
                         <button type="submit"
-                            class="w-full bg-[#3b38a0] hover:bg-[#7a85c1] text-white py-2 rounded-md  transition duration-200 font-medium">
+                            class="w-full bg-[#660B05] hover:bg-[#500a05] text-white py-2 rounded-md  transition duration-200 font-medium">
                             Add
                         </button>
 
@@ -56,7 +52,7 @@
             <div class="bg-white p-6 rounded-2xl shadow-md w-auto border border-[#e5e7eb]">
                 <div class="mt-8 ">
                     <table class="min-w-lg text-sm text-left text-[#111827] border border-[#e5e7eb]">
-                        <thead class="bg-[#3b38a0] text-white text-center">
+                        <thead class="bg-[#660B05] text-white text-center">
                             <tr>
                                 <th class="px-6 py-3">Category</th>
                                 <th class="px-6 py-3">Edit</th>

@@ -129,5 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out;
 }
+
+#qr-reader video {
+  transform: scaleX(-1);
+}
 </style>
 @endpush

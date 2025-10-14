@@ -89,7 +89,7 @@
             {{-- Submit --}}
             <div class="pt-4">
                 <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow">
+                    class="w-full bg-[#660B05] hover:bg-[#460702] text-white font-semibold py-2 px-4 rounded-md shadow">
                     Update
                 </button>
             </div>

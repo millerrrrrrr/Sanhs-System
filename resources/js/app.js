@@ -1,5 +1,12 @@
 import './bootstrap';
 
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
+
+// Optional: make Chart available globally if needed
+window.Chart = Chart;
+
+
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 

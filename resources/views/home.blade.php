@@ -31,6 +31,30 @@
             <p class="text-[#7a85c1 mt-2]"> {{ $numberOfStudents }} </p>
       
     </div>
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-[#e5e7eb]">
+        <h2 class="text-lg font-semibold ">Number Late this morning</h2>
+
+            <p class="text-[#7a85c1 mt-2]"> {{ $morningLate }} </p>
+      
+    </div>
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-[#e5e7eb]">
+        <h2 class="text-lg font-semibold ">Number Absent this morning</h2>
+
+            <p class="text-[#7a85c1 mt-2]"> {{ $morningAbsent }} </p>
+      
+    </div>
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-[#e5e7eb]">
+        <h2 class="text-lg font-semibold ">Number of Late this afternoon</h2>
+
+            <p class="text-[#7a85c1 mt-2]"> {{ $afternoonLate }} </p>
+      
+    </div>
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-[#e5e7eb]">
+        <h2 class="text-lg font-semibold ">Number of Absent this afternoon</h2>
+
+            <p class="text-[#7a85c1 mt-2]"> {{ $afternoonAbsent }} </p>
+      
+    </div>
 
   
 
@@ -39,10 +63,10 @@
 </div>
 
 
-<div class="page mt-4 ">
+{{-- <div class="page mt-4 ">
     <h2 class="title">Display Title </h2>
     <p class="p">Helllo</p>
-</div>
+</div> --}}
 
 
 

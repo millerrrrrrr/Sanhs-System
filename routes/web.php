@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BackupController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\QrTesterController;
@@ -18,6 +20,12 @@ Route::middleware(['authCheck', 'admin'])->group(function () {
 
     Route::get('home', [DashboardController::class, 'home'])->name('home');
 
+
+    Route::get('/changePassword', [ChangePasswordController::class, 'changePasswordIndex'])->name('changePasswordIndex');
+    Route::put('/changePassword', [ChangePasswordController::class, 'changePassword'])->name('changePassword');
+
+    Route::get('/backup', [BackupController::class, 'index'])->name('backupIndex');
+    Route::post('/backup', [BackupController::class, 'backup'])->name('backup.run');
 
     Route::prefix('student')->controller(StudentController::class)->group(function () {
 
@@ -55,7 +63,7 @@ Route::middleware(['authCheck', 'admin'])->group(function () {
     Route::prefix('attendance')->controller(AttendanceController::class)->group(function () {
 
         Route::get('/', 'AttendanceIndex')->name('attendanceIndex');
-        Route::get('/search', 'search')->name('attendanceSearch');
+        Route::get('/filter', 'filter')->name('attendanceFilter');
     });
 });
 

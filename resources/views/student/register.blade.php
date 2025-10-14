@@ -3,13 +3,13 @@
 @section('pagetitle', 'Register Student')
 
 @section('main')
-    <div class="p-6 bg-white w-full max-w-2xl mx-auto rounded-md shadow-md">
-        <h2 class="text-2xl font-bold mb-6 text-gray-700">Student Registration</h2>
+    <div class="p-6 bg-white w-full  max-w-2xl mx-auto rounded-md shadow-md h-[80%]">
+        <h2 class="text-2xl font-bold mb-6  text-gray-700 text-center">Student Registration</h2>
 
 
 
 
-        <form action="{{ route('registerStudent') }}" method="POST" class="space-y-4">
+        <form action="{{ route('registerStudent') }}" method="POST" class="space-y-2.5">
             @csrf
 
             {{-- Name --}}
@@ -53,7 +53,7 @@
                     value="{{ old('lrn') }}"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
                     placeholder="Enter 12-digit LRN" oninput="limitLRNLength(event)">
-                <p class="text-xs text-gray-500">Must be exactly 12 digits</p>
+          
             </div>
 
 
@@ -112,7 +112,7 @@
             {{-- Submit --}}
             <div class="pt-4">
                 <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow">
+                    class="w-full bg-[#660B05] hover:bg-[#540903] text-white font-semibold py-2 px-4 rounded-md shadow">
                     Register
                 </button>
             </div>

@@ -54,6 +54,20 @@
                     <option value="{{ route('level') }}">List</option>
                 </select>
             </div>
+{{-- 
+            <div>
+                <a href="{{ route('changePasswordIndex') }}"
+                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition">Settings</a>
+            </div> --}}
+
+              <div>
+                <select id="settings"
+                    class="font-semibold text-gray-300 hover:text-gray-500 duration-200 transition text-center">
+                    <option value="" selected disabled>Settings</option>
+                    <option value="{{ route('changePasswordIndex') }}">Change Password</option>
+                    <option value="{{ route('backupIndex') }}">Back Up</option>
+                </select>
+            </div>
     
             <form action=" {{ route('logout') }} " method="POST">
                 @csrf
@@ -80,6 +94,15 @@
 
     <script>
         document.getElementById('level').addEventListener('change', function() {
+            const url = this.value;
+            if (url) {
+                window.location.href = url;
+            }
+        });
+    </script>
+
+     <script>
+        document.getElementById('settings').addEventListener('change', function() {
             const url = this.value;
             if (url) {
                 window.location.href = url;
